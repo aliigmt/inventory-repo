@@ -17,6 +17,10 @@
         .card-registration .select-arrow {
             top: 13px;
         }
+        span.text-danger.error-class {
+            margin-bottom: 12px;
+            margin-top: -24px;
+        }
     </style>
             @yield('content')
 </body>

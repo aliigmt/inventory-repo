@@ -18,31 +18,37 @@
                 <form action="{{ route('createuser') }}" method="POST">
                             @csrf
                 <div class="form-outline mb-4">
-                  <input type="text" id="name" name="name" class="form-control form-control-lg" required />
+                  <input type="text" id="name" name="name" class="form-control form-control-lg" />
                   <label class="form-label" for="name">Name</label>
-                    @if ($errors->has('name'))
-                     <span class="text-danger">{{ $errors->first('name') }}</span>
-                    @endif
                 </div>
-
+                 @if ($errors->has('name'))
+                    <span class="text-danger error-class">{{ $errors->first('name') }}</span>
+                 @endif
+                
                 <div class="form-outline mb-4">
                   <input type="text" id="email" name="email" class="form-control form-control-lg" />
                   <label class="form-label" for="email">Email</label>
                 </div>
-                @if ($errors->has('email'))
-                   <span class="text-danger">{{ $errors->first('email') }}</span>
+                @if($errors->has('email'))
+                   <span class="text-danger error-class">{{ $errors->first('email') }}</span>
+                 @endif
+              
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="password"  name="password" class="form-control form-control-lg" />
+                  <label class="form-label" for="password">Password</label>
+                </div>
+                @if($errors->has('password'))
+                   <span class="text-danger error-class">{{ $errors->first('password') }}</span>
                  @endif
 
-                 
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example99" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example99">Password</label>
+                  <input type="text" id="mobile" name="mobile" class="form-control form-control-lg" />
+                  <label class="form-label" for="mobile">Mobile</label>
                 </div>
-
-                <div class="form-outline mb-4">
-                  <input type="text" id="form3Example97" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example97">Mobile</label>
-                </div>
+                 @if($errors->has('mobile'))
+                   <span class="text-danger error-class">{{ $errors->first('mobile') }}</span>
+                 @endif
 
                 <div class="d-flex justify-content">
                   <!-- <button type="button" class="btn btn-light btn-lg">Reset all</button> -->
