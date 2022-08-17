@@ -9,7 +9,17 @@ class UserController extends Controller
 {
     public function Index(){
 
-        return view('auth.register');
+        return view('Auth.user');
     }
+
+ public function Store(Request $request){
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:6',
+    ]);
+
+       
+ }
 
 }
