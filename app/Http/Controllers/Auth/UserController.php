@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use App\Models\User;
+use Hash;
+use Session;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -17,7 +17,7 @@ class UserController extends Controller
     $request->validate([
         'name' => 'required',
         'email' => 'required|email|unique:users',
-        'password' => 'required|min:6',
+        'password' => 'required|min:3',
         'mobile' => 'required',
     ]);
     $data = $request->all();
@@ -33,7 +33,7 @@ class UserController extends Controller
      'name' => $data['name'],
      'email' => $data['email'],
      'mobile' => $data['mobile'],
-     'password' => Crypt::encryptString($data['password'])
+     'password' =>Hash::make($data['password'])
    ]);
  } 
 
@@ -42,7 +42,6 @@ public function login(){
 }
 
 public function customLogin(Request $request){
-    return $request->all();
     $request->validate([
         'email' => 'required',
         'password' => 'required',
@@ -53,7 +52,7 @@ public function customLogin(Request $request){
         return redirect()->intended('dashboard')
                     ->withSuccess('Signed in');
     }
-    return redirect("login")->withSuccess('Login details are not valid');
+    return redirect("/")->withSuccess('Login details are not valid');
 }
 
 public function dashboard()
@@ -61,7 +60,7 @@ public function dashboard()
     if(Auth::check()){
         return view('welcome');
     }
-    return redirect("login")->withSuccess('You are not allowed to access');
+    return redirect("/")->withSuccess('You are not allowed to access');
 }
 
 public function signOut() {
